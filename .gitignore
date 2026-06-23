@@ -4,8 +4,8 @@
 .env
 *.env
 
-# Output (large files)
-output/triples.json
+# Keep triples.json for submission
+# output/triples.json
 output/knowledge_graph.gpickle
 output/*.gpickle
 
