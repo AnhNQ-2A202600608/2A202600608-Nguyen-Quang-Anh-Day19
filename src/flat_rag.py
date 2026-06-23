@@ -18,7 +18,7 @@ from groq import Groq
 # ─────────────────────────────────────────────────────────────
 # Cấu hình
 # ─────────────────────────────────────────────────────────────
-MODEL_NAME       = "llama-3.3-70b-versatile"
+MODEL_NAME       = "llama-3.1-8b-instant"
 EMBEDDING_MODEL  = "all-MiniLM-L6-v2"   # nhanh, nhẹ, miễn phí
 COLLECTION_NAME  = "ev_corpus"
 TOP_K            = 5

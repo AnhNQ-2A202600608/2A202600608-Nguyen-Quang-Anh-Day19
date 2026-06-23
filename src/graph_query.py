@@ -22,7 +22,7 @@ from rapidfuzz import fuzz, process
 # ─────────────────────────────────────────────────────────────
 # Cấu hình
 # ─────────────────────────────────────────────────────────────
-MODEL_NAME      = "llama-3.3-70b-versatile"
+MODEL_NAME      = "llama-3.1-8b-instant"
 MAX_CONTEXT_LEN = 4000   # ký tự tối đa gửi cho LLM
 HOP_DEPTH       = 2      # độ sâu BFS
 TOP_K_ENTITIES  = 3      # số entity chính cần extract từ câu hỏi
