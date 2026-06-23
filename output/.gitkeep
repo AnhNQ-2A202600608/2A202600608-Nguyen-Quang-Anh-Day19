@@ -1,0 +1,11 @@
+# output/
+# Thư mục này được tạo tự động khi chạy pipeline.
+# Các file được tạo ra:
+#   - triples.json           (entity extraction cache)
+#   - knowledge_graph.gpickle (graph file)
+#   - knowledge_graph.png    (visualization)
+#   - subgraph_Tesla.png
+#   - subgraph_BYD.png
+#   - evaluation_results.csv
+#   - evaluation_chart.png
+#   - final_report.json

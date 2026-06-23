@@ -1,0 +1,39 @@
+# GraphRAG Lab Day 19 - .gitignore
+
+# Environment & Secrets
+.env
+*.env
+
+# Output (large files)
+output/triples.json
+output/knowledge_graph.gpickle
+output/*.gpickle
+
+# Keep images & CSV for submission
+!output/*.png
+!output/*.csv
+!output/final_report.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ChromaDB data
+chroma_db/
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
