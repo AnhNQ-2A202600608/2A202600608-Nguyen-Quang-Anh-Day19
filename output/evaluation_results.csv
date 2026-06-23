@@ -1,0 +1,219 @@
+﻿ID,Category,Question,FlatRAG_Score,GraphRAG_Score,FlatRAG_Completeness,GraphRAG_Completeness,FlatRAG_Time_s,GraphRAG_Time_s,FlatRAG_Context_chars,GraphRAG_Context_chars,Winner,FlatRAG_Answer,GraphRAG_Answer,Missing_in_FlatRAG,Missing_in_GraphRAG
+1,Simple,What was Tesla's market share in the US EV market in Q1 2024?,10.0,10.0,3/3,3/3,1.7,16.31,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""What was Tesla's market share in the US EV market in Q1 2024?""
+2.  **Scan Retrieved Documents for Keywords:** Keyword","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts).
+   - **Question:** ",,
+2,Simple,How many new electric vehicles were sold in the US in Q1 2024?,10.0,5.0,2/2,1/2,1.48,16.16,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Task:** Answer the question based *only* on the provided documents.
+   - **Q","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A set of knowledge graph triples (facts) about the US EV indus",,"268,909"
+3,Simple,What percentage of the global electric car stock does China account for?,5.0,10.0,1/2,2/2,1.37,16.34,4016,4016,GraphRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""What percentage of the global electric car stock does China account for?""
+2.  **Scan Retrieved Documents for Keywords","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about the EV industr",40%,
+4,Simple,What was the average transaction price for a new EV in Q1 2024?,5.0,5.0,1/2,1/2,12.45,17.23,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""What was the average transaction price for a new EV in Q1 2024?""
+
+2.  **Scan Retrieved Documents for Keywords:** Keyw","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts).
+   - **Question:** ","$55,167","$55,167"
+5,Simple,What is CATL and where does it have factories in Europe?,10.0,10.0,4/4,4/4,9.86,16.14,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:**
+   - **Question:** What is CATL and where does it have factories in Europe?
+   - **Key Entities/Concepts:** CATL, factories in Europe","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry (though the context is global/Europe/China focused, I'll stick to the prompt's const",,
+6,Multi-hop,What is the connection between BYD and Warren Buffett's Berkshire Hathaway?,7.5,5.0,3/4,2/4,10.75,18.25,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Task:** Answer the question based *only* on the provided documents.
+   - **Q","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about BYD, Tesla, EV",10%,"10%, stake"
+7,Multi-hop,How did Tesla's price cuts in China affect its competitive position against NIO?,10.0,10.0,5/5,5/5,10.91,16.15,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""How did Tesla's price cuts in China affect its competitive position against NIO?""
+2.  **Scan Retrieved Documents for ","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about the EV industr",,
+8,Multi-hop,What role did the Inflation Reduction Act play in EV leasing trends in Q1 2024?,6.0,4.0,3/5,2/5,10.69,15.13,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""What role did the Inflation Reduction Act play in EV leasing trends in Q1 2024?""
+2.  **Scan Retrieved Documents for K","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A set of knowledge graph triples (facts).
+   - **Question:** W","$7,500, 27%","IRA, $7,500, 27%"
+9,Multi-hop,How are Chinese EV manufacturers connected to the Thai automotive market?,8.0,4.0,4/5,2/5,9.94,16.19,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry (though the question is about China/Thailand, I'll stick to the prompt's constraint ","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about the US EV indu",BYD,"factory, BYD, investment"
+10,Multi-hop,"What is the relationship between CATL, Ford, and the IRA investment in Michigan?",10.0,10.0,4/4,4/4,11.86,16.2,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Task:** Answer the question based *only* on the provided documents.
+   - **Q","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A set of knowledge graph triples (facts).
+   - **Question:** W",,
+11,Comparative,Compare Tesla's YoY EV sales growth in Q1 2024 vs. Cadillac's growth in the same...,10.0,6.0,5/5,3/5,11.76,9.13,4016,1020,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Task:** Compare Tesla's YoY EV sales growth in Q1 2024 vs. Cadillac's growth","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A set of knowledge graph triples (facts).
+   - **Question:** C",,"-13.3%, 499.2%"
+12,Comparative,Which EV manufacturers achieved over 50% year-over-year growth in Q1 2024?,10.0,0.0,6/6,0/6,12.56,16.36,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""Which EV manufacturers achieved over 50% year-over-year growth in Q1 2024?""
+2.  **Scan Retrieved Documents for Keywor","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A set of knowledge graph triples (facts).
+   - **Question:** W",,"BMW, Cadillac, Ford, Hyundai, Kia, Rivian"
+13,Comparative,How does EV battery pack pricing in China compare to the United States?,5.0,5.0,2/4,2/4,10.57,16.29,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""How does EV battery pack pricing in China compare to the United States?""
+2.  **Scan Retrieved Documents for Keywords:","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about the EV industr","24%, battery pack prices","24%, lower"
+14,Comparative,"Compare the EV market penetration forecast for the US, Europe, and China by 2030...",5.7,7.1,4/7,5/7,12.59,16.24,4016,4016,GraphRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Task:** Compare the EV market penetration forecast for the US, Europe, and C","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about the EV industr","37%, 40%, 48%","37%, 40%"
+15,Comparative,How does the charging infrastructure availability differ between high and low EV...,0.0,2.5,0/4,1/4,10.51,15.54,4016,4016,GraphRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""How does the charging infrastructure availability differ between high and low EV adoption areas?""
+2.  **Scan Retrieve","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A set of knowledge graph triples (facts) about EVs, charging i","935, public chargers, per million, top ten","935, per million, top ten"
+16,Trend,Describe the trend in US EV sales growth from Q1 2022 through Q1 2024.,8.0,2.0,4/5,1/5,12.62,17.25,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Task:** Describe the trend in US EV sales growth from Q1 2022 through Q1 202","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about the EV industr",slowing,"81.2%, 46.4%, 2.6%, slowing"
+17,Trend,"How has China's share of global EV exports changed, and what drove this growth?",4.0,4.0,2/5,2/5,10.58,16.16,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:**
+   - **Question:** How has China's share of global EV exports changed, and what drove this growth?
+   - **Key Elements to Address:** ","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry (though the question is about China, I'll stick to the provided context).
+   - **Con","35%, industrial policy, subsidies","35%, industrial policy, subsidies"
+18,Trend,What has been the trend in EV average transaction prices from 2023 to Q1 2024?,5.0,0.0,2/4,0/4,12.59,17.24,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""What has been the trend in EV average transaction prices from 2023 to Q1 2024?""
+2.  **Scan Retrieved Documents for Ke","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts).
+   - **Question:** ","9.0%, $55,167","9.0%, decrease, $55,167, price reduction"
+19,Trend,How has ZEV regulation impacted EV adoption in US states over time?,10.0,4.0,5/5,2/5,10.55,16.17,4016,4016,FlatRAG,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Question:** The user asks: ""How has ZEV regulation impacted EV adoption in US states over time?""
+2.  **Scan Retrieved Documents for Keywords:** K","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A set of knowledge graph triples (facts) about the EV industry",,"5%, zero-emission, 13 more"
+20,Trend,Trace BYD's rise from a Chinese domestic company to the world's largest EV produ...,6.0,6.0,3/5,3/5,13.51,17.15,4016,4016,Tie,"<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry (though the question is about BYD, a Chinese company, I should maintain an analytica","<think>
+Here's a thinking process:
+
+1.  **Analyze User Input:**
+   - **Role:** Expert analyst of the US EV industry.
+   - **Input Data:** A list of knowledge graph triples (facts) about BYD, Tesla, EV","surpassed Tesla, exports","surpassed Tesla, exports"

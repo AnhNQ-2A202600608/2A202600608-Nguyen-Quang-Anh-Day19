@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "student": "Nguyen Quang Anh",
+    "student_id": "2A202600608",
+    "lab": "Day 19 - GraphRAG",
+    "dataset": "70 EV Corpus documents",
+    "llm": "Groq llama-3.1-8b-instant",
+    "embedding_model": "all-MiniLM-L6-v2"
+  },
+  "graph_stats": {
+    "num_nodes": 4390,
+    "num_edges": 4348,
+    "num_triples": 4794,
+    "entity_types": {
+      "OTHER": 2445,
+      "METRIC": 408,
+      "CONCEPT": 569,
+      "LOCATION": 603,
+      "COMPANY": 175,
+      "DATE": 183,
+      "PERSON": 7
+    }
+  },
+  "evaluation": {
+    "flat_rag_avg_score": 7.26,
+    "graphrag_avg_score": 5.48,
+    "winner_counts": {
+      "FlatRAG": 9,
+      "Tie": 8,
+      "GraphRAG": 3
+    },
+    "flat_rag_avg_time": 9.94,
+    "graphrag_avg_time": 16.08
+  },
+  "cost": {
+    "groq_cost_usd": 0.0,
+    "openai_equivalent_usd": 0.103,
+    "total_extraction_time_s": 0.0
+  }
+}

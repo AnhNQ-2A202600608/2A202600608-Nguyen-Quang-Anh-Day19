@@ -13,6 +13,7 @@ Quy trình:
 """
 
 import time
+import re
 from typing import List, Dict, Any, Optional, Set, Tuple
 
 import networkx as nx
@@ -22,7 +23,7 @@ from rapidfuzz import fuzz, process
 # ─────────────────────────────────────────────────────────────
 # Cấu hình
 # ─────────────────────────────────────────────────────────────
-MODEL_NAME      = "llama-3.1-8b-instant"
+MODEL_NAME      = "openai/gpt-oss-20b"
 MAX_CONTEXT_LEN = 4000   # ký tự tối đa gửi cho LLM
 HOP_DEPTH       = 2      # độ sâu BFS
 TOP_K_ENTITIES  = 3      # số entity chính cần extract từ câu hỏi
@@ -72,6 +73,8 @@ def _extract_query_entities_llm(client: Groq, question: str) -> List[str]:
             max_tokens=200,
         )
         raw = response.choices[0].message.content.strip()
+        if "<think>" in raw:
+            raw = re.sub(r"<think>[\s\S]*?</think>", "", raw).strip()
         # Làm sạch markdown fence nếu có
         raw = re.sub(r"^```(?:json)?\n?", "", raw)
         raw = re.sub(r"\n?```$", "", raw)
@@ -282,7 +285,10 @@ def query_graphrag(
         temperature=0.1,
         max_tokens=512,
     )
-    answer = response.choices[0].message.content.strip()
+    raw = response.choices[0].message.content.strip()
+    if "<think>" in raw:
+        raw = re.sub(r"<think>[\s\S]*?</think>", "", raw).strip()
+    answer = raw
 
     elapsed = time.time() - start
 

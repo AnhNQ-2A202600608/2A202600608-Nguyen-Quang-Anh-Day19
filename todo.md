@@ -15,10 +15,10 @@
 - [x] `.env.example`, `.gitignore`, `README.md`
 - [x] Install dependencies
 - [x] Commit initial codebase to GitHub
-- [/] Run full end-to-end pipeline test on all 521 chunks (PAUSED: 325/521 chunks completed, 4,628 triples saved in output/triples_partial.json)
-- [ ] Verify output files (knowledge_graph.png, subgraphs, evaluation_results.csv, evaluation_chart.png, final_report.json)
+- [x] Run full end-to-end pipeline test on all 521 chunks (Completed, 4,794 unique triples extracted)
+- [x] Verify output files (knowledge_graph.png, subgraphs, evaluation_results.csv, evaluation_chart.png, final_report.json)
 - [ ] Push final output artifacts and remaining updates to GitHub
-- [ ] Create walkthrough.md summary
+- [x] Create walkthrough.md summary
 
 ---
 

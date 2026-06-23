@@ -29,7 +29,7 @@ TRIPLES_FILE = OUTPUT_DIR / "triples.json"
 PARTIAL_FILE = OUTPUT_DIR / "triples_partial.json"
 
 MODEL_NAME   = "llama-3.1-8b-instant"
-MODEL_LIST   = ["llama-3.1-8b-instant", "qwen/qwen3.6-27b"]
+MODEL_LIST   = ["llama-3.1-8b-instant"]
 MAX_RETRIES  = 5
 RETRY_DELAY  = 3
 RATE_LIMIT_WAIT = 30
@@ -52,6 +52,10 @@ JSON:"""
 # ---------------------------------------------------------------
 def _extract_from_chunk(client: Groq, chunk_text: str, doc_id: str, model_name: str) -> List[Dict]:
     """Call Groq API to extract triples from a single chunk."""
+    # Detect binary garbage (e.g. null bytes or PDF streams)
+    if "\x00" in chunk_text or "endstream" in chunk_text:
+        return []
+
     # Trim text aggressively to save tokens
     text = chunk_text[:2000]
     prompt = EXTRACTION_PROMPT.format(text=text)
@@ -233,11 +237,17 @@ def _deduplicate_triples(triples: List[Dict]) -> List[Dict]:
     seen = set()
     unique = []
     for t in triples:
-        key = (
-            t.get("subject", "").lower().strip(),
-            t.get("relation", "").lower().strip(),
-            t.get("object", "").lower().strip(),
-        )
+        # Enforce all values are string
+        subj = str(t.get("subject", "")).strip()
+        rel  = str(t.get("relation", "")).strip()
+        obj  = str(t.get("object", "")).strip()
+        
+        # Update in-place to prevent issues in downstream builder
+        t["subject"] = subj
+        t["relation"] = rel
+        t["object"] = obj
+        
+        key = (subj.lower(), rel.lower(), obj.lower())
         if key not in seen and all(k for k in key):
             seen.add(key)
             unique.append(t)

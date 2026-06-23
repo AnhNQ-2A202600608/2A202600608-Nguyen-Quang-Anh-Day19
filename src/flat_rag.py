@@ -18,7 +18,7 @@ from groq import Groq
 # ─────────────────────────────────────────────────────────────
 # Cấu hình
 # ─────────────────────────────────────────────────────────────
-MODEL_NAME       = "llama-3.1-8b-instant"
+MODEL_NAME       = "openai/gpt-oss-20b"
 EMBEDDING_MODEL  = "all-MiniLM-L6-v2"   # nhanh, nhẹ, miễn phí
 COLLECTION_NAME  = "ev_corpus"
 TOP_K            = 5
@@ -165,7 +165,11 @@ class FlatRAG:
             temperature=0.1,
             max_tokens=512,
         )
-        answer = response.choices[0].message.content.strip()
+        raw = response.choices[0].message.content.strip()
+        import re
+        if "<think>" in raw:
+            raw = re.sub(r"<think>[\s\S]*?</think>", "", raw).strip()
+        answer = raw
 
         elapsed = time.time() - start
 
