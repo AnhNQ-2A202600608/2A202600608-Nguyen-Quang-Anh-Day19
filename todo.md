@@ -17,7 +17,7 @@
 - [x] Commit initial codebase to GitHub
 - [x] Run full end-to-end pipeline test on all 521 chunks (Completed, 4,794 unique triples extracted)
 - [x] Verify output files (knowledge_graph.png, subgraphs, evaluation_results.csv, evaluation_chart.png, final_report.json)
-- [ ] Push final output artifacts and remaining updates to GitHub
+- [x] Push final output artifacts and remaining updates to GitHub
 - [x] Create walkthrough.md summary
 
 ---
