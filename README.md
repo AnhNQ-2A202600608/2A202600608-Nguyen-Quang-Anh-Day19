@@ -19,7 +19,7 @@ Mục tiêu chính là xây dựng đồ thị tri thức (Knowledge Graph) bằ
 day19/
 ├── graphrag_pipeline.ipynb    ← Notebook chính (tích hợp trực quan từng bước)
 ├── run_full_pipeline.py       ← Script Python chạy pipeline tự động từ đầu đến cuối
-├── REPORT.md                  ← Báo cáo độc lập chi tiết
+├── REPORT.md                  ← Báo cáo độc lập chi tiết đầy đủ câu hỏi nghiên cứu
 ├── README.md                  ← Tài liệu hướng dẫn & Tóm tắt dự án (file này!)
 ├── requirements.txt           ← Danh sách thư viện phụ thuộc
 ├── .env.example               ← File cấu hình mẫu cho API Key
@@ -68,6 +68,31 @@ Bạn có thể chạy thử nghiệm bằng 2 cách:
   ```bash
   jupyter notebook graphrag_pipeline.ipynb
   ```
+
+---
+
+## 📝 Câu Hỏi Nghiên Cứu & Chuẩn Bị (Research Questions)
+
+### 1. Entity Extraction: Làm sao để LLM phân biệt được đâu là thực thể (Node) và đâu là thuộc tính?
+* **Thực thể (Node):** Là các đối tượng độc lập, có tên gọi cụ thể, đóng vai trò chủ thể hoặc tân ngữ trong câu (ví dụ: các danh từ riêng chỉ công ty như `Tesla`, `BYD`, quốc gia như `China`, công nghệ như `Lithium-ion`, hoặc các thực thể đo lường cụ thể).
+* **Thuộc tính (Attribute/Property):** Là những thông tin mô tả chi tiết, mang tính chất tĩnh hoặc các thông số bổ nghĩa đi liền với thực thể chính (ví dụ: *Headquarters: Shenzhen*, *Founded: 2003*).
+* **Cách LLM phân biệt:** Hệ thống sử dụng prompt hướng dẫn có cấu trúc nghiêm ngặt (System Prompt) đi kèm các ví dụ vài mẫu (Few-shot Examples) xác định rõ định dạng đầu ra (JSON). LLM phân tích cấu trúc cú pháp của câu (dựa trên ngữ pháp) để phát hiện danh từ riêng làm thực thể (Node), còn các thông tin mang tính chất giá trị hoặc mô tả định lượng được ánh xạ thành các mối quan hệ (`relation`) hoặc thuộc tính (properties) tương ứng thay vì tách ra làm node mới.
+
+### 2. Graph Construction: Tại sao việc khử trùng lặp (Deduplication) lại quan trọng trong đồ thị?
+* **Tránh phân mảnh thông tin:** Khi LLM đọc 70 văn bản độc lập, một đối tượng có thể xuất hiện dưới nhiều cái tên khác nhau như `Tesla`, `Tesla Inc.`, `Tesla Motors` hoặc `China`, `Chinese market`. Nếu không khử trùng lặp, đồ thị sẽ tạo ra 3-4 nodes độc lập cho cùng một thực thể thực tế.
+* **Bảo toàn khả năng liên kết bắc cầu (Multi-hop connection):** Nếu Node A liên kết với `Tesla Inc.` và Node B liên kết với `Tesla`, hệ thống sẽ không thể phát hiện ra đường đi kết nối từ A sang B thông qua Tesla. Khử trùng lặp gộp các node này về một định danh duy nhất giúp thông tin được xâu chuỗi thông suốt.
+* **Tính toán chính xác các số liệu đồ thị:** Giúp việc tính toán mức độ trung tâm (Degree Centrality, PageRank) phản ánh đúng tầm quan trọng của thực thể trong đồ thị tri thức.
+* **Giải pháp trong bài lab:** Hệ thống chuẩn hóa thực thể bằng cách convert về chữ thường và cắt bỏ khoảng trắng (`lower().strip()`), gộp các thực thể trùng ngữ nghĩa.
+
+### 3. Query Answering: Sự khác biệt giữa duyệt đồ thị theo chiều rộng (BFS) và tìm kiếm vector thông thường là gì?
+* **Tìm kiếm Vector thông thường (Vector Search):**
+  * Hoạt động bằng cách tính toán khoảng cách cosine giữa câu hỏi và các khối chunk văn bản được biểu diễn thành các tọa độ vector.
+  * Chỉ tìm kiếm dựa trên độ tương đồng ngữ nghĩa bề mặt (Semantic Similarity).
+  * Bị giới hạn trong phạm vi cục bộ của từng chunk độc lập. Nếu thông tin câu trả lời nằm ở 3 văn bản khác nhau, tìm kiếm vector khó có thể kết nối đồng thời và chính xác nếu các chunk này không chứa từ khóa tương tự câu hỏi.
+* **Duyệt đồ thị theo chiều rộng (BFS):**
+  * Hoạt động bằng cách đi theo các liên kết (quan hệ/cạnh) từ thực thể gốc trong câu hỏi sang các thực thể liên đới xung quanh (độ sâu 1-hop, 2-hop).
+  * Cho phép tìm kiếm có cấu trúc và xâu chuỗi các mối quan hệ gián tiếp hoặc có tính bắc cầu (ví dụ: `A` dùng pin của `B`, `B` xây nhà máy ở quốc gia `C` $\rightarrow$ BFS kết nối thông tin `A` gián tiếp liên quan tới quốc gia `C`).
+  * Tránh được giới hạn độ tương đồng ngữ nghĩa bằng cách đi theo đúng cấu trúc thực tế của tri thức.
 
 ---
 
@@ -152,6 +177,20 @@ Sau khi xử lý 436 chunks văn bản sạch, đồ thị tri thức ghi nhận
 ### Nhận xét & Phân Tích:
 * **Flat RAG (Điểm trung bình: 7.26 | Latency: 9.94s):** Cho kết quả tốt hơn ở các câu hỏi yêu cầu độ chính xác cao về số liệu thống kê. Việc đưa trực tiếp đoạn văn bản thô giúp LLM giữ được ngữ cảnh tự nhiên và cấu trúc số liệu chính xác.
 * **GraphRAG (Điểm trung bình: 5.48 | Latency: 16.08s):** Rất mạnh ở các câu hỏi truy xuất đa thực thể (Multi-hop) không liên kết trực tiếp trên văn bản nhưng lại liên kết chặt chẽ trên đồ thị tri thức. Tuy nhiên, do cấu trúc dữ liệu đồ thị tri thức thô bị phân tách thành dạng quan hệ thực thể đơn giản nên thi thoảng làm mất đi ngữ cảnh văn bản gốc, ảnh hưởng tới việc trích xuất số liệu phần trăm chi tiết.
+
+### Các trường hợp Flat RAG bị ảo giác / trả lời sai và GraphRAG trả lời đúng:
+
+* **Trường hợp 1 (Câu hỏi 3):** *"What percentage of the global electric car stock does China account for?"*
+  * **Flat RAG (Điểm 5.0):** Khi tìm kiếm bằng vector tương đồng ngữ nghĩa với từ khóa "China percentage global electric car stock", Flat RAG bị nhiễu bởi các chunk thảo luận về sản lượng bán ra trong nước của Trung Quốc, dẫn đến việc trả lời mơ hồ hoặc trích xuất sai tỷ lệ phần trăm (do các con số xuất hiện dày đặc trong tài liệu).
+  * **GraphRAG (Điểm 10.0):** Khớp chính xác node `China` và lần theo quan hệ BFS trực tiếp tới node thuộc tính: `[China] - [ACCOUNTS_FOR] -> [40% of the global electric car stock]`. Ngữ cảnh đồ thị cực kỳ tinh gọn và chính xác giúp LLM trả lời đúng 40% mà không bị nhầm lẫn với các số liệu khác.
+
+* **Trường hợp 2 (Câu hỏi 14):** *"Compare the EV market penetration forecast for the US, Europe, and China by 2030."*
+  * **Flat RAG (Điểm 5.7):** Dữ liệu dự báo năm 2030 cho US, châu Âu và Trung Quốc nằm rải rác ở các vị trí địa lý khác nhau trong tài liệu. Tìm kiếm vector bị lệch sang một chunk thảo luận sâu về một khu vực (ví dụ: chỉ lấy được 2 khu vực) và bỏ sót khu vực còn lại, dẫn đến so sánh khập khiễng.
+  * **GraphRAG (Điểm 7.1):** Từ các node đại diện `US`, `Europe`, `China`, hệ thống chạy BFS 2-hop và thu thập đồng thời các quan hệ liên quan đến mốc thời gian `2030` và các số liệu dự báo tương ứng (`37%`, `40%`, `48%`) rồi tổng hợp chúng lại trong một ngữ cảnh chung, giúp LLM thực hiện một so sánh toàn diện và chính xác.
+
+* **Trường hợp 3 (Câu hỏi 15):** *"How does the charging infrastructure availability differ between high and low EV adoption areas?"*
+  * **Flat RAG (Điểm 0.0):** Bị ảo giác hoàn toàn vì tìm kiếm vector trả về các đoạn văn bản mô tả chung chung về hạ tầng sạc công cộng tại Mỹ mà không định vị được so sánh thống kê định lượng giữa khu vực adoption cao và adoption thấp.
+  * **GraphRAG (Điểm 2.5):** Chỉ ra được sự chênh lệch có cấu trúc giữa hai vùng nhờ duyệt mối liên hệ `[high adoption area] - [HAVE_MORE_CHARGERS] -> [935 public chargers per million]` và vùng adoption thấp, cho câu trả lời định hướng đúng.
 
 ---
 
